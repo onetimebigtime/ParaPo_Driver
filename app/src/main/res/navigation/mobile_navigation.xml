@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_seats">
+
+    <fragment
+        android:id="@+id/navigation_seats"
+        android:name="com.example.parapo_driver.ui.home.SeatsFragment"
+        android:label="@string/title_seats"
+        tools:layout="@layout/fragment_seats" />
+
+    <fragment
+        android:id="@+id/navigation_seek"
+        android:name="com.example.parapo_driver.ui.dashboard.SeekFragment"
+        android:label="@string/title_seek"
+        tools:layout="@layout/fragment_seek" />
+
+    <fragment
+        android:id="@+id/navigation_self"
+        android:name="com.example.parapo_driver.ui.notifications.SelfFragment"
+        android:label="@string/title_self"
+        tools:layout="@layout/fragment_self" />
+</navigation>

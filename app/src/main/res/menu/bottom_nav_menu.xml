@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_seats"
+        android:icon="@drawable/ic_seats"
+        android:title="@string/title_seats" />
+
+    <item
+        android:id="@+id/navigation_seek"
+        android:icon="@drawable/ic_seek"
+        android:title="@string/title_seek" />
+
+    <item
+        android:id="@+id/navigation_self"
+        android:icon="@drawable/ic_self"
+        android:title="@string/title_self" />
+
+</menu>
