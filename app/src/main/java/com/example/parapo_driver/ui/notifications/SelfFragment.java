@@ -24,8 +24,8 @@ public class SelfFragment extends Fragment {
         binding = FragmentSelfBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        selfViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        /*final TextView textView = binding.textNotifications;
+        selfViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
         return root;
     }
 

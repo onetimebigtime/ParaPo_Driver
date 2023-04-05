@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@color/main_color"
+    android:elevation="10dp"
+    tools:context=".ui.signup.SignUpActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--PARAPO LOGO-->
+            <RelativeLayout
+                android:id="@+id/signup_RL_logoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/signup_logo1_imageview"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:elevation="10dp"
+                    android:src="@mipmap/ic_launcher_parapo"
+                    app:civ_border_color="@color/sec_color"
+                    app:civ_border_width="5dp" />
+            </RelativeLayout>
+            <!--PARAPO LOGO-->
+
+            <!--SIGN UP LABEL-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="1dp"
+                android:padding="10dp"
+                android:text="@string/signup_label"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/parapo_text_color" />
+            <!--SIGN UP LABEL-->
+
+            <!--LOGIN FORM SECTION-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="35dp">
+
+                <!--FULL NAME SECTION-->
+                <TextView
+                    android:id="@+id/signup_fullname_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fullname_label"
+                    android:textColor="@color/parapo_text_color" />
+
+                <EditText
+                    android:id="@+id/signup_fullname_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signup_fullname_label"
+                    android:autofillHints="Anonymous Rider"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/fullname"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/parapo_text_color"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/signup_fullname_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signup_fullname_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor" />
+                <!--FULL NAME SECTION-->
+
+                <!--EMAIL SECTION-->
+                <TextView
+                    android:id="@+id/signup_email_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signup_fullname_view"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/email_label"
+                    android:textColor="@color/parapo_text_color" />
+
+                <EditText
+                    android:id="@+id/signup_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signup_email_label"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/email_address"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/parapo_text_color"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/signup_email_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signup_email_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor" />
+                <!--EMAIL SECTION-->
+
+                <!--PLATE NO. SECTION-->
+                <TextView
+                    android:id="@+id/signup_plate_number_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signup_email_view"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/plate_number_label"
+                    android:textColor="@color/parapo_text_color" />
+
+                <EditText
+                    android:id="@+id/signup_plate_number_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signup_plate_number_label"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/plate_number"
+                    android:textColor="@color/parapo_text_color"
+                    android:textSize="18sp"
+                    android:inputType="text" />
+
+                <View
+                    android:id="@+id/signup_plate_number_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signup_plate_number_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor" />
+                <!--PLATE NO. SECTION-->
+
+
+                <!--PASSWORD SECTION-->
+                <TextView
+                    android:id="@+id/signup_password_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signup_plate_number_view"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/password_label"
+                    android:textColor="@color/parapo_text_color" />
+
+                <EditText
+                    android:id="@+id/signup_password_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signup_password_label"
+                    android:autofillHints="123456"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/password_label"
+                    android:inputType="textPassword"
+                    android:textColor="@color/parapo_text_color"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/signup_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signup_password_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor" />
+                <!--PASSWORD SECTION-->
+
+                <!--CONFIRM PASSWORD SECTION-->
+                <TextView
+                    android:id="@+id/confirmpass_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signup_password_view"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/confirmpass_label"
+                    android:textColor="@color/parapo_text_color" />
+
+                <EditText
+                    android:id="@+id/confirmpass_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/confirmpass_label"
+                    android:autofillHints="123456"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/confirmpass_label"
+                    android:inputType="textPassword"
+                    android:textColor="@color/parapo_text_color"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/confirmpass_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/confirmpass_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor" />
+                <!--CONFIRM PASSWORD SECTION-->
+
+                <!--SIGN UP BUTTON SECTION-->
+                <Button
+                    android:id="@+id/signup_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/confirmpass_view"
+                    android:layout_marginTop="20dp"
+                    android:elevation="10dp"
+                    android:text="@string/signup_label"
+                    android:backgroundTint="@color/sec_color"
+                    app:cornerRadius="20dp" />
+                <!--SIGN UP BUTTON SECTION-->
+
+                <!--CANCERL SECTION-->
+                <TextView
+                    android:id="@+id/signup_cancel_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signup_button"
+                    android:text="@string/have_acc_label"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="20dp"/>
+                <!--CANCEL SECTION-->
+
+                <!--PROGRESS BAR SECTION-->
+                <ProgressBar
+                    android:id="@+id/signup_progressbar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+                <!--PROGRESS BAR SECTION-->
+            </RelativeLayout>
+            <!--LOGIN FORM SECTION-->
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,25 @@
     <string name="title_seats">Seats</string>
     <string name="title_seek">Seek</string>
     <string name="title_self">Self</string>
+
+    <string name="signup_label">SIGN UP</string>
+    <string name="fullname_label">Full Name</string>
+    <string name="email_label">Email Address</string>
+    <string name="plate_number_label">Plate Number</string>
+    <string name="password_label">Password</string>
+    <string name="confirmpass_label">Confirm Password</string>
+    <string name="have_acc_label">Already Have an Account?</string>
+    <string name="signin_label">SIGN IN</string>
+
+
+    <string name="fullname">Lastname, Firstname</string>
+    <string name="email_address">sample@parapo.com</string>
+    <string name="plate_number">ABC 123</string>
+    
+    <string name="user_logo">User Logo</string>
+    <string name="email_logo">Email Logo</string>
+    <string name="plate_logo">Plate no. Logo</string>
+    <string name="logout">SIGN OUT</string>
+
+
 </resources>

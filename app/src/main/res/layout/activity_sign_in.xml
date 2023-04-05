@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signin_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    tools:context=".SignInActivity"
+    android:layout_centerInParent="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--PARAPO LOGO-->
+            <RelativeLayout
+                android:id="@+id/signin_RL_logoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView_logo1"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:elevation="10dp"
+                    android:src="@mipmap/ic_launcher_parapo"
+                    app:civ_border_color="@color/sec_color"
+                    app:civ_border_width="5dp" />
+            </RelativeLayout>
+            <!--PARAPO LOGO-->
+
+            <!--SIGN UP LABEL-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="25dp"
+                android:padding="10dp"
+                android:text="@string/signin_label"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/parapo_text_color"/>
+            <!--SIGN UP LABEL-->
+
+            <!--LOGIN FORM SECTION-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp">
+
+                <!--EMAIL SECTION-->
+                <TextView
+                    android:id="@+id/signin_email_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_label"
+                    android:textColor="@color/parapo_text_color"/>
+
+                <EditText
+                    android:id="@+id/signin_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signin_email_label"
+                    android:hint="@string/email_address"
+                    android:background="@android:color/transparent"
+                    android:textSize="18sp"
+                    android:textColor="@color/parapo_text_color"
+                    android:inputType="textEmailAddress"
+                    android:importantForAutofill="no" />
+
+                <View
+                    android:id="@+id/signin_email_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signin_email_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor"/>
+                <!--EMAIL SECTION-->
+
+                <!--PASSWORD SECTION-->
+                <TextView
+                    android:id="@+id/signin_password_label"
+                    android:layout_below="@id/signin_email_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/password_label"
+                    android:textColor="@color/parapo_text_color"/>
+
+                <EditText
+                    android:id="@+id/signin_password_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/signin_password_label"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/password_label"
+                    android:textSize="18sp"
+                    android:textColor="@color/parapo_text_color"
+                    android:inputType="textPassword"
+                    android:autofillHints="123456"/>
+
+                <View
+                    android:id="@+id/signin_pass_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/signin_password_text"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/parapo_text_lightcolor"/>
+
+                <TextView
+                    android:id="@+id/signin_showpass_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_below="@id/signin_pass_view"/>
+                <!--PASSWORD SECTION-->
+
+                <!--SIGN IN BUTTON SECTION-->
+                <Button
+                    android:id="@+id/signin_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/signin_showpass_label"
+                    android:layout_marginTop="10dp"
+                    android:elevation="10dp"
+                    android:text="@string/signin_label"
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/sec_color"/>
+                <!--SIGN IN BUTTON SECTION-->
+
+                <!--PROGRESS BAR SECTION-->
+                <ProgressBar
+                    android:id="@+id/signin_progressbar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+                <!--PROGRESS BAR SECTION-->
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/parapo_text_lightcolor"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp" >
+                <Button
+                    android:id="@+id/to_signup_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="20dp"
+                    android:elevation="10dp"
+                    android:text="@string/signup_label"
+                    android:backgroundTint="@color/sec_color"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
