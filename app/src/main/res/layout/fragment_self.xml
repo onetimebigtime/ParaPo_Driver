@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/main_color"
         tools:ignore="MissingConstraints">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
                         android:id="@+id/imageView_user_profile"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        tools:src="@tools:sample/avatars"
+                        android:src="@mipmap/ic_no_profile_user"
                         app:civ_border_color="@color/white"
                         app:civ_border_width="5dp" />
                 </androidx.cardview.widget.CardView>
@@ -179,6 +180,18 @@
                     android:backgroundTint="@color/sec_color"/>
             </RelativeLayout>
             <!--LOGOUT BUTTON CONTAINER-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                tools:ignore="RtlSymmetry">
+            </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
 

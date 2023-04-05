@@ -7,9 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    #234F1E
     <color name="parapo_text_color">#000000</color>
     <color name="parapo_text_lightcolor">#000000</color>
     <color name="main_color">#D0F0C0</color>
     <color name="sec_color">#234F1E</color>
+    <color name="third_color">#000000</color>
 </resources>

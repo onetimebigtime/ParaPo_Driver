@@ -23,5 +23,8 @@
     <string name="plate_logo">Plate no. Logo</string>
     <string name="logout">SIGN OUT</string>
 
+    <string name="show_pass">show</string>
+    <string name="hide_pass">hide</string>
+
 
 </resources>
