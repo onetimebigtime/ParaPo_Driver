@@ -18,19 +18,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class SelfViewModel extends ViewModel {
-
     private final MutableLiveData<String> fullNameTitle, fullName, emailAddress, plateNumber;
+
     private FirebaseUser firebaseUser;
     private UserData setUserData;
+    private String message;
+    private boolean isFinished;
+    private boolean isThere;
 
     public void checkFirebaseUser(){
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
-
+            message = "User can't be found!";
+            isThere = false;
         }
         else {
+            isThere = true;
             getUserData();
+
         }
     }
 
@@ -56,6 +62,7 @@ public class SelfViewModel extends ViewModel {
 
             }
         });
+        isFinished = true;
     }
 
     public SelfViewModel() {
@@ -63,6 +70,7 @@ public class SelfViewModel extends ViewModel {
         fullName = new MutableLiveData<>();
         emailAddress = new MutableLiveData<>();
         plateNumber = new MutableLiveData<>();
+        isFinished = false;
         checkFirebaseUser();
     }
 
@@ -81,4 +89,7 @@ public class SelfViewModel extends ViewModel {
     public LiveData<String> getPlateNumber() {
         return plateNumber;
     }
+    public String getMessage() {return message;}
+    public boolean isFinished() {return isFinished;}
+    public boolean isThere() {return isThere;}
 }

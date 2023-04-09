@@ -2,7 +2,7 @@ package com.example.parapo_driver.ui.signup;
 
 public class UserData {
     public int seat_1, seat_2, seat_3, seat_4, seat_5, seat_6, seat_7, seat_8, seat_9, seat_10;
-    public long latitude, longitude;
+    public double latitude, longitude;
     public String user_id ,full_name, plate_number;
 
     public boolean is_online;
@@ -11,7 +11,7 @@ public class UserData {
 
     }
 
-    public UserData(String user_id, String full_name, String plate_number, int seat_1, int seat_2, int seat_3, int seat_4, int seat_5, int seat_6, int seat_7, int seat_8, int seat_9, int seat_10, long latitude, long longitude, boolean is_online) {
+    public UserData(String user_id, String full_name, String plate_number, int seat_1, int seat_2, int seat_3, int seat_4, int seat_5, int seat_6, int seat_7, int seat_8, int seat_9, int seat_10, double latitude, double longitude, boolean is_online) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.plate_number = plate_number;
