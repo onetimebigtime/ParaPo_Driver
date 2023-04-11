@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText signupFullNameText, signupEmailAddressText, signupPlateNumberText,signupPasswordText, signupConfirmText;
     private int seat_1, seat_2, seat_3, seat_4, seat_5, seat_6, seat_7, seat_8, seat_9, seat_10;
     private double latitude, longitude;
-    private String full_name, email_address, plate_number, password, confirm_password;
+    private String full_name, email_address, plate_number, password, confirm_password, route;
     private Boolean isOnline;
     private ProgressBar signupProgressBar;
     private static final String TAG = "SignUpFragment";
@@ -67,10 +67,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         //-----------------------------SIGN UP BUTTON ON CLICK FUNCTION SECTION------------------------------------------
         signupButton.setOnClickListener(v -> {
-            //SETTING UP SEAT,LAT, LONG VARIABLES VALUE TO 0
-            seat_1 = seat_2 = seat_3 = seat_4 = seat_5 = seat_6 = seat_7 = seat_8 = seat_9 = seat_10 = 0;
-            latitude = longitude = 0d;
-            isOnline = false;
 
             //SET STRING VARIABLE VALUES ACCORDING TO TEXT BOXES INPUT
             full_name =signupFullNameText.getText().toString().trim();
@@ -116,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
             else {
                 signupProgressBar.setVisibility(View.VISIBLE);
                 //1--SIGNING UP DRIVER
-                signInUser(full_name, email_address, plate_number, password,seat_1, seat_2, seat_3, seat_4, seat_5, seat_6, seat_7, seat_8, seat_9, seat_10, latitude, longitude, isOnline);
+                signInUser(full_name, email_address, plate_number, password);
             }
         });
         //-----------------------------SIGN UP BUTTON ON CLICK FUNCTION SECTION------------------------------------------
@@ -132,7 +128,14 @@ public class SignUpActivity extends AppCompatActivity {
         //-----------------------------CANCEL BUTTON ON CLICK FUNCTION SECTION------------------------------------------
     }
     //------------------------SIGNING UP DRIVER FUNCTION SECTION----------------------------------------------------------
-    private void signInUser(String full_name, String email_address, String plate_number, String password, int seat_1, int seat_2, int seat_3, int seat_4, int seat_5, int seat_6, int seat_7, int seat_8, int seat_9, int seat_10, double latitude, double longitude, Boolean isOnline) {
+    private void signInUser(String full_name, String email_address, String plate_number, String password) {
+
+        //SETTING UP SEAT,LAT, LONG VARIABLES VALUE TO 0 AND DEFAULT PLACE
+        seat_1 = seat_2 = seat_3 = seat_4 = seat_5 = seat_6 = seat_7 = seat_8 = seat_9 = seat_10 = 0;
+        latitude = longitude = 0d;
+        isOnline = false;
+        route = "Unknown";
+
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         //FUNCTION TO CREATE A USER USING EMAIL AND PASSWORD
         firebaseAuth.createUserWithEmailAndPassword(email_address, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
@@ -145,7 +148,9 @@ public class SignUpActivity extends AppCompatActivity {
                     String userId = firebaseUser.getUid();
 
                     //SET USER DATA
-                    UserData setUserData = new UserData(userId ,full_name, plate_number, seat_1, seat_2, seat_3, seat_4, seat_5, seat_6, seat_7, seat_8, seat_9, seat_10, latitude, longitude, isOnline);
+                    UserData setUserData = new UserData(userId ,full_name, plate_number, route, seat_1, seat_2, seat_3, seat_4,
+                            seat_5, seat_6, seat_7, seat_8, seat_9, seat_10, latitude, longitude, isOnline);
+
                     //GETTING DRIVERS REFERENCE IN FIREBASE
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Drivers");
                     databaseReference.child(userId).setValue(setUserData).addOnCompleteListener(new OnCompleteListener<Void>() {

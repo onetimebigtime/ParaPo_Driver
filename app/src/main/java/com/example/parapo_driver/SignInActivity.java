@@ -153,6 +153,7 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
     //---------------SIGNING IN USER FUNCTION SECTION------------------------
+
     //---------------ON START FUNCTION SECTION-----------------------------------------
 
     @Override
@@ -167,6 +168,5 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(SignInActivity.this, "Login Now!", Toast.LENGTH_SHORT).show();
         }
     }
-
     //---------------ON START FUNCTION SECTION-----------------------------------------
 }

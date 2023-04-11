@@ -26,5 +26,7 @@
     <string name="show_pass">show</string>
     <string name="hide_pass">hide</string>
 
+    <string name="seat_count">0</string>
+
 
 </resources>

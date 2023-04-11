@@ -74,7 +74,6 @@ public class SelfFragment extends Fragment {
         getActivity().finish();
         startActivity(new Intent(this.requireActivity(), SignInActivity.class));
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
