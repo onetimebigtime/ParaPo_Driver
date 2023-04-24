@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "426488540847",
+    "firebase_url": "https://parapo-7a631-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "parapo-7a631",
+    "storage_bucket": "parapo-7a631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426488540847:android:935bbfe3724a300cd3ee5a",
+        "android_client_info": {
+          "package_name": "com.example.parapo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426488540847-oeblkeefm57p3rfl2oe3d35t9ukivmsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbOEng8zdmlhHZrgGcsdE8tZHDR_Fyj1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426488540847-oeblkeefm57p3rfl2oe3d35t9ukivmsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426488540847:android:88955672e9b71c52d3ee5a",
+        "android_client_info": {
+          "package_name": "com.example.parapo_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426488540847-oeblkeefm57p3rfl2oe3d35t9ukivmsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbOEng8zdmlhHZrgGcsdE8tZHDR_Fyj1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426488540847-oeblkeefm57p3rfl2oe3d35t9ukivmsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
