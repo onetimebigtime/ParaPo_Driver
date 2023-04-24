@@ -13,6 +13,8 @@
     <color name="main_color">#D0F0C0</color>
     <color name="sec_color">#234F1E</color>
     <color name="third_color">#000000</color>
+    <color name="grey">#606060</color>
+    <color name="shadow">#739860</color>
 
     <color name="floor_color">#a7a7a7</color>
     <color name="seat_color_0">#9DF492</color>

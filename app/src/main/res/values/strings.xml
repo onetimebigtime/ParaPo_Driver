@@ -27,6 +27,9 @@
     <string name="hide_pass">hide</string>
 
     <string name="seat_count">0</string>
+    <string name="drive">Drive</string>
+    <string name="self_locate">My Location</string>
+    <string name="route">Route</string>
 
 
 </resources>
