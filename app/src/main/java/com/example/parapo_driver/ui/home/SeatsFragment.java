@@ -1,12 +1,17 @@
 package com.example.parapo_driver.ui.home;
 
-import android.content.res.Resources;
+
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -24,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 public class SeatsFragment extends Fragment {
 
     private FragmentSeatsBinding binding;
+    public static final String TAG = "SeatFragment";
 
     private TextView seat1, seat2, seat3, seat4, seat5, seat6, seat7, seat8, seat9, seat10;
+
+    private EditText routeText;
     private FirebaseUser firebaseUser;
     private UserData setUserData;
 
@@ -41,6 +48,9 @@ public class SeatsFragment extends Fragment {
 
         binding = FragmentSeatsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        Button goButton = root.findViewById(R.id.go_button);
+        routeText = root.findViewById(R.id.seat_route_text);
+
         seat1 = binding.seat1Label;
         seat2 = binding.seat2Label;
         seat3 = binding.seat3Label;
@@ -52,6 +62,11 @@ public class SeatsFragment extends Fragment {
         seat9 = binding.seat9Label;
         seat10 = binding.seat10Label;
         checkFirebaseUser();
+
+        goButton.setOnClickListener(v -> {
+            String route = routeText.getText().toString().trim();
+            updateRoute(route);
+        });
 
         /*final TextView textView = binding.textHome;
         seatsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
@@ -195,6 +210,29 @@ public class SeatsFragment extends Fragment {
         else {
             seat10.setBackgroundColor(color_0);
         }
+    }
+
+    public void updateRoute(String route){
+        try {
+            if (TextUtils.isEmpty(route)){
+                routeText.setError("Please enter your route!");
+                routeText.requestFocus();
+            }
+
+            else {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null) {
+                    return;
+                }
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Drivers").child(user.getUid());
+                ref.child("route").setValue(route);
+            }
+        }
+        catch (Exception e) {
+            Log.e(TAG, "Failed to update online status", e);
+            Toast.makeText(requireActivity(), "Failed to update online status!", Toast.LENGTH_SHORT).show();
+        }
+
     }
     //-------------------CONTROL SEAT COLORS AND HANDLE UPDATES---------------------
     @Override

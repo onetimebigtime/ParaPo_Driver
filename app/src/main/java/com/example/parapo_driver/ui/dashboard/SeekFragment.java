@@ -12,13 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -38,7 +35,6 @@ import com.example.parapo_driver.R;
 import  com.example.parapo_driver.databinding.FragmentSeekBinding;
 import com.example.parapo_driver.ui.signup.UserData;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.CurrentLocationRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Granularity;
 import com.google.android.gms.location.LocationCallback;
@@ -48,8 +44,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.CancellationTokenSource;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -72,7 +66,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class SeekFragment extends Fragment {
 
@@ -81,10 +74,8 @@ public class SeekFragment extends Fragment {
 
     private ToggleButton driveButton;
     private TextView passengerCountView;
-    private EditText seekRouteText;
     private FusedLocationProviderClient fusedLocationClient; //GIVE LOCATION
     private final static int REQUEST_CODE = 100;
-    private ArrayList<UserData> list;
 
     private static final double defaultLocationVal = 0;
 
@@ -106,48 +97,12 @@ public class SeekFragment extends Fragment {
                 new ViewModelProvider(this).get(SeekViewModel.class);
 
         binding = FragmentSeekBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity());
-
-        //--------------------DRIVE BUTTON ON CLICK FUNCTION SECTION------------------------
-        /*driveButton.setOnClickListener(v -> {
-            String route = seekRouteText.getText().toString().trim();
-            if (TextUtils.isEmpty(route)) {
-                seekRouteText.setError("Please enter your route!");
-                seekRouteText.requestFocus();
-                driveButton.setChecked(false);
-            } else {
-                if (driveButton.isChecked()) {
-                    if (hasLocationPermissions()) {
-                        getRealtimeLocation();
-                    } else {
-                        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                            //DIALOG BOX STRINGS
-                            String title = "Location Permission Request";
-                            String message = "ParaPo needs your location to use our services";
-                            String posTitle = "Enable";
-                            String negTitle = "Cancel";
-                            showAlertDialog(title, message, posTitle, (dialog, which) -> multiplePermissionLauncher.launch(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION}), negTitle);
-                        } else {
-                            multiplePermissionLauncher.launch(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION});
-                        }
-                    }
-                } else {
-                    //INPUT LOCATION TO ZERO
-
-                }
-            }
-        });*/
-        //--------------------DRIVE BUTTON ON CLICK FUNCTION SECTION------------------------
 
         /*final TextView textView = binding.textDashboard;
         seekViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
 
-        return root;
+        return binding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -161,7 +116,6 @@ public class SeekFragment extends Fragment {
         FloatingActionButton selfLocateButton = view.findViewById(R.id.floatingActionButton2);
         driveButton = view.findViewById(R.id.drive_button);
         passengerCountView = view.findViewById(R.id.seek_passenger_view);
-        seekRouteText = view.findViewById(R.id.seek_route_text);
         seekIcon = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_passenger);
         mapView = view.findViewById(R.id.map);
         //----------SETTING UP COMPONENTS----------------------------------------
@@ -178,6 +132,7 @@ public class SeekFragment extends Fragment {
 
         //----------CALLING FUNCTIONS----------------------------------------
         myLocationNewOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this.requireActivity()), mapView);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity());
 
         getPassengerCount();
         getRealtimeMarker();
@@ -186,32 +141,34 @@ public class SeekFragment extends Fragment {
         //-----------------SELF LOCATE BUTTON ON CLICK FUNCTION SECTION----------------------
         selfLocateButton.setOnClickListener(v -> {
             if (hasLocationPermissions()) {
-                getMyLocation();
+                getUserLocation();
                 getRealtimeLocation();
+            } else if (!hasLocationPermissions()) {
+                getLocationPermission();
             }
-            getLocationPermission();
         });
         //-----------------SELF LOCATE BUTTON ON CLICK FUNCTION SECTION----------------------
 
         //-----------------DRIVER BUTTON ON CLICK FUNCTION SECTION----------------------
         driveButton.setOnClickListener(v -> {
             //String route = seekRouteText.getText().toString().trim();
-            if (driveButton.isChecked() && hasLocationPermissions()) {
-                getRealtimeLocation();
-                getMyLocation();
-                updateUserData(true, "Dakota");
-                Toast.makeText(requireActivity(), "You are now visible! Drive safely!", Toast.LENGTH_SHORT).show();
+            if (driveButton.isChecked()) {
+                if (hasLocationPermissions()) {
+                    getRealtimeLocation();
+                    getUserLocation();
+                    updateOnlineData(true);
+                    Toast.makeText(requireActivity(), "You are now visible! Drive safely!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    getLocationPermission();
+                    driveButton.setChecked(false);
+                }
+
             } else {
-                getLocationPermission();
-                //seekRouteText.setError("Please enter your route!");
-                //seekRouteText.requestFocus();
-                //driveButton.setChecked(false);
                 myLocationNewOverlay.disableMyLocation();
-
                 updateLocationData(defaultLocationVal, defaultLocationVal);
-                updateUserData(false, "Unknown");
+                updateOnlineData(false);
                 fusedLocationClient.removeLocationUpdates(locationCallback);
-
                 Toast.makeText(requireActivity(), "You are now offline!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -238,10 +195,16 @@ public class SeekFragment extends Fragment {
     //-----------------LOCATION PERMISSION FUNCTION SECTION----------------------
 
     //-----------------GET USER OWN LOCATION FUNCTION SECTION----------------------
-    private void getMyLocation() {
+    private void getUserLocation() {
         myLocationNewOverlay.enableMyLocation();
-        mapView.getOverlays().add(myLocationNewOverlay);
-        myLocationNewOverlay.enableFollowLocation();
+        if (!mapView.getOverlays().contains(myLocationNewOverlay)) {
+            mapView.getOverlays().add(myLocationNewOverlay);
+            myLocationNewOverlay.enableFollowLocation();
+        }
+        else {
+            mapView.getOverlays().remove(myLocationNewOverlay);
+            mapView.getOverlays().add(myLocationNewOverlay);
+        }
     }
     //-----------------GET USER OWN LOCATION FUNCTION SECTION----------------------
 
@@ -307,6 +270,7 @@ public class SeekFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(TAG, "DatabaseError" +error.getMessage());
+                Toast.makeText(requireActivity(), "Failed to get locations! Check your internet!", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -354,10 +318,9 @@ public class SeekFragment extends Fragment {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
-                mapController.setZoom(20.0);
                 startPoint = new GeoPoint(latitude, longitude);
-                mapController.setCenter(startPoint);
                 mapController.animateTo(startPoint);
+                mapController.setZoom(19.5);
 
                 //UPDATING USER DATA
                 updateLocationData(latitude, longitude);
@@ -408,116 +371,65 @@ public class SeekFragment extends Fragment {
     });
     //--------------------LAUNCH PERMISSION IF LOCATION PERMISSION IS STILL NOT GRANTED-------------------------------
 
-    //-----------GET CURRENT LOCATION------------------------
-
-    /*
-    @SuppressLint("MissingPermission")
-    private void getCurrentLocation(){
-        CurrentLocationRequest currentLocationRequest = new CurrentLocationRequest.Builder()
-                .setGranularity(Granularity.GRANULARITY_FINE)
-                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-                .setDurationMillis(5000)
-                .setMaxUpdateAgeMillis(0)
-                .build();
-
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        fusedLocationClient.getCurrentLocation(currentLocationRequest, cancellationTokenSource.getToken()).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Location location = task.getResult();
+    private void updateOnlineData(boolean isOnline) {
+        try {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) {
+                return;
             }
-            else {
-                //TRY CATCH INSERT
-                try {
-                    throw Objects.requireNonNull(task.getException());
-                } catch (Exception e) {
-                    Log.e(TAG, e.getMessage());
-                    Toast.makeText(this.requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-    }*/
-    //-----------GET CURRENT LOCATION------------------------
-
-    private void updateUserData(Boolean isOnline, String route) {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser == null) {
-            Toast.makeText(this.requireActivity(), "Unable to find user!", Toast.LENGTH_SHORT).show();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Drivers").child(user.getUid());
+            ref.child("is_online").setValue(isOnline);
         }
-        else {
-            HashMap<String, Object> userData = new HashMap<>();
-            userData.put("is_online", isOnline);
-            userData.put("route", route);
-            String userId = firebaseUser.getUid();
-
-            updateData(userId, userData);
+        catch (Exception e) {
+            Log.e(TAG, "Failed to update online status", e);
+            Toast.makeText(requireActivity(), "Failed to update online status!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void updateLocationData(double latitude, double longitude) {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser == null) {
-            Toast.makeText(this.requireActivity(), "Unable to find user!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            HashMap<String, Object> userData = new HashMap<>();
-            userData.put("latitude", latitude);
-            userData.put("longitude", longitude);
-            String userId = firebaseUser.getUid();
-
-            updateData(userId, userData);
-        }
-    }
-
-    private void updateData(String userId, HashMap<String, Object> userData){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Drivers");
-
-        databaseReference.child(userId).updateChildren(userData).addOnCompleteListener((OnCompleteListener<Void>) task -> {
-            if(task.isSuccessful()){
-
-            } else {
-                Toast.makeText(requireActivity(), "Can't Complete the task!", Toast.LENGTH_SHORT).show();
+        try {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) {
+                return;
             }
-        });
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Drivers").child(user.getUid());
+            ref.child("latitude").setValue(latitude);
+            ref.child("longitude").setValue(longitude);
+        }
+        catch (Exception e) {
+            Log.e(TAG, "Failed to update online status", e);
+            Toast.makeText(requireActivity(), "Failed to update location status!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //--------LOCATION CALL BACK----------------------------
 
     //--------PASSENGER AVAILABLE----------------------------
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     public void getPassengerCount() {
-        list = new ArrayList<>();
+        List<UserData> list = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Travelers");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
+                int onlineCount = 0;
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     UserData userData = dataSnapshot.getValue(UserData.class);
-                    assert userData != null;
-                    boolean isOnline = userData.is_online;
-                    if (isOnline) {
+                    if (userData != null && userData.is_online) {
                         list.add(userData);
-                        int countPassenger = list.size();
-                        passengerCountView.setText(String.valueOf(countPassenger));
-
-                    } else if (list.size()==0) {
-                        passengerCountView.setText(String.valueOf(list.size()));
+                        onlineCount++;
                     }
-
                 }
+                passengerCountView.setText(String.valueOf(onlineCount));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(requireActivity(), "Failed to get the passenger count!", Toast.LENGTH_SHORT).show();
             }
         });
     }
     //--------PASSENGER AVAILABLE----------------------------
-
-
 
     @Override
     public void onResume() {

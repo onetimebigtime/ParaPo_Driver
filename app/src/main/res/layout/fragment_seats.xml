@@ -5,260 +5,310 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.SeatsFragment">
-    <androidx.cardview.widget.CardView
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="300dp"
-        android:layout_height="545dp"
-        android:elevation="10dp"
-        android:backgroundTint="@color/floor_color"
-        app:cardCornerRadius="10dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp">
 
-            <!--LEFT SIDE SEAT CONTAINER-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="300dp"
+                android:layout_height="545dp"
+                android:backgroundTint="@color/floor_color"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!--LEFT SIDE SEAT CONTAINER-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:orientation="vertical">
+                        <!--SEAT NO. 1 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_1_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="1"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 1 CONTAINER-->
+
+                        <!--SEAT NO. 2 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_2_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="2"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 2 CONTAINER-->
+
+                        <!--SEAT NO. 3 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_3_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="3"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 3 CONTAINER-->
+
+                        <!--SEAT NO. 4 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_4_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="4"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 4 CONTAINER-->
+
+                        <!--SEAT NO. 5 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_5_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="5"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 5 CONTAINER-->
+
+                        <!--SEAT NO. 6 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_6_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="-90"
+                                android:text="6"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 6 CONTAINER-->
+                    </LinearLayout>
+                    <!--LEFT SIDE SEAT CONTAINER-->
+
+                    <!--RIGHT SIDE SEAT CONTAINER-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="120dp"
+                        android:orientation="vertical">
+
+                        <!--DOOR SIDE CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="138dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:backgroundTint="@color/door_color"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp"
+                            tools:ignore="VisualLintBounds">
+
+                            <TextView
+                                android:id="@+id/door_label"
+                                android:layout_width="175dp"
+                                android:layout_height="175dp"
+                                android:rotation="-90"
+                                android:text="DOOR"
+                                android:textAlignment="center"
+                                android:textSize="40sp"
+                                tools:ignore="VisualLintBounds" />
+                        </androidx.cardview.widget.CardView>
+                        <!--DOOR SIDE CONTAINER-->
+
+                        <!--SEAT NO. 7 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_7_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="90"
+                                android:text="7"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 7 CONTAINER-->
+
+                        <!--SEAT NO. 8 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_8_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="90"
+                                android:text="8"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 8 CONTAINER-->
+
+                        <!--SEAT NO. 9 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_9_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="90"
+                                android:text="9"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 9 CONTAINER-->
+
+                        <!--SEAT NO. 10 CONTAINER-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/seat_10_label"
+                                android:layout_width="85dp"
+                                android:layout_height="85dp"
+                                android:background="@color/seat_color_0"
+                                android:rotation="90"
+                                android:text="10"
+                                android:textAlignment="center"
+                                android:textSize="40sp" />
+                        </androidx.cardview.widget.CardView>
+                        <!--SEAT NO. 10 CONTAINER-->
+                    </LinearLayout>
+                    <!--RIGHT SIDE SEAT CONTAINER-->
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="vertical">
-                <!--SEAT NO. 1 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp">
+                <Button
+                    android:id="@+id/go_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="10dp"
+                    app:cornerRadius = "10dp"
+                    android:text="Go"
+                    android:backgroundTint="@color/sec_color"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
+                    android:hint="@string/route"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp">
 
-                    <TextView
-                        android:id="@+id/seat_1_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="1"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 1 CONTAINER-->
-
-                <!--SEAT NO. 2 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_2_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="2"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 2 CONTAINER-->
-
-                <!--SEAT NO. 3 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_3_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="3"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 3 CONTAINER-->
-
-                <!--SEAT NO. 4 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_4_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="4"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 4 CONTAINER-->
-
-                <!--SEAT NO. 5 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_5_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="5"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 5 CONTAINER-->
-
-                <!--SEAT NO. 6 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_6_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="-90"
-                        android:text="6"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 6 CONTAINER-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/seat_route_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        tools:ignore="KeyboardInaccessibleWidget" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-            <!--LEFT SIDE SEAT CONTAINER-->
-
-            <!--RIGHT SIDE SEAT CONTAINER-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
-                android:orientation="vertical">
-
-                <!--DOOR SIDE CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="138dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:backgroundTint="@color/door_color"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp"
-                    tools:ignore="VisualLintBounds">
-
-                    <TextView
-                        android:id="@+id/door_label"
-                        android:layout_width="175dp"
-                        android:layout_height="175dp"
-                        android:rotation="-90"
-                        android:text="DOOR"
-                        android:textAlignment="center"
-                        android:textSize="40sp"
-                        tools:ignore="VisualLintBounds" />
-                </androidx.cardview.widget.CardView>
-                <!--DOOR SIDE CONTAINER-->
-
-                <!--SEAT NO. 7 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_7_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="90"
-                        android:text="7"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 7 CONTAINER-->
-
-                <!--SEAT NO. 8 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_8_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="90"
-                        android:text="8"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 8 CONTAINER-->
-
-                <!--SEAT NO. 9 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_9_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="90"
-                        android:text="9"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 9 CONTAINER-->
-
-                <!--SEAT NO. 10 CONTAINER-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:elevation="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:id="@+id/seat_10_label"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:background="@color/seat_color_0"
-                        android:rotation="90"
-                        android:text="10"
-                        android:textAlignment="center"
-                        android:textSize="40sp" />
-                </androidx.cardview.widget.CardView>
-                <!--SEAT NO. 10 CONTAINER-->
-            </LinearLayout>
-            <!--RIGHT SIDE SEAT CONTAINER-->
-
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
