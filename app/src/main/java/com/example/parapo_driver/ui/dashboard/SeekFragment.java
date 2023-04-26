@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
@@ -59,6 +60,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
@@ -97,9 +99,6 @@ public class SeekFragment extends Fragment {
                 new ViewModelProvider(this).get(SeekViewModel.class);
 
         binding = FragmentSeekBinding.inflate(inflater, container, false);
-
-        /*final TextView textView = binding.textDashboard;
-        seekViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
 
         return binding.getRoot();
     }
@@ -143,7 +142,7 @@ public class SeekFragment extends Fragment {
             if (hasLocationPermissions()) {
                 getUserLocation();
                 getRealtimeLocation();
-            } else if (!hasLocationPermissions()) {
+            } else {
                 getLocationPermission();
             }
         });
@@ -156,12 +155,10 @@ public class SeekFragment extends Fragment {
                 if (hasLocationPermissions()) {
                     getRealtimeLocation();
                     getUserLocation();
-                    updateOnlineData(true);
                     Toast.makeText(requireActivity(), "You are now visible! Drive safely!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     getLocationPermission();
-                    driveButton.setChecked(false);
                 }
 
             } else {
@@ -176,6 +173,8 @@ public class SeekFragment extends Fragment {
 
 
     }
+
+
     //-----------------LOCATION PERMISSION FUNCTION SECTION----------------------
     private void getLocationPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -240,6 +239,7 @@ public class SeekFragment extends Fragment {
                     if (isOnline) {
                         double latitude = userData.latitude;
                         double longitude = userData.longitude;
+                        String userName = userData.full_name;
 
                         GeoPoint geoPoint = new GeoPoint(latitude, longitude);
                         geoPointList.add(geoPoint);
@@ -255,7 +255,7 @@ public class SeekFragment extends Fragment {
                         }
 
                         marker.setPosition(geoPoint);
-                        marker.setTitle(userId);
+                        marker.setTitle(userName);
                     }else {
                         Marker marker = markers.get(userId);
                         if (marker != null) {
@@ -277,6 +277,8 @@ public class SeekFragment extends Fragment {
     //-----------------GET TRAVELER MARKER REALTIME LOCATION--------------------------------------
 
     //-----------------GET USERS REALTIME LOCATION--------------------------------------
+
+
     @SuppressLint("MissingPermission")
     private  void getRealtimeLocation(){
 
@@ -323,7 +325,10 @@ public class SeekFragment extends Fragment {
                 mapController.setZoom(19.5);
 
                 //UPDATING USER DATA
-                updateLocationData(latitude, longitude);
+                if (driveButton.isChecked()) {
+                    updateLocationData(latitude, longitude);
+                    updateOnlineData(true);
+                }
             }
 
         }
