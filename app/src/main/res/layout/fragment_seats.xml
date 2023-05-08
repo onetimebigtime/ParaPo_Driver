@@ -20,7 +20,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="300dp"
-                android:layout_height="545dp"
+                android:layout_height="371dp"
                 android:backgroundTint="@color/floor_color"
                 android:elevation="10dp"
                 app:cardCornerRadius="10dp"
@@ -119,46 +119,6 @@
                                 android:textSize="40sp" />
                         </androidx.cardview.widget.CardView>
                         <!--SEAT NO. 4 CONTAINER-->
-
-                        <!--SEAT NO. 5 CONTAINER-->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="10dp">
-
-                            <TextView
-                                android:id="@+id/seat_5_label"
-                                android:layout_width="85dp"
-                                android:layout_height="85dp"
-                                android:background="@color/seat_color_0"
-                                android:rotation="-90"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="40sp" />
-                        </androidx.cardview.widget.CardView>
-                        <!--SEAT NO. 5 CONTAINER-->
-
-                        <!--SEAT NO. 6 CONTAINER-->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="10dp">
-
-                            <TextView
-                                android:id="@+id/seat_6_label"
-                                android:layout_width="85dp"
-                                android:layout_height="85dp"
-                                android:background="@color/seat_color_0"
-                                android:rotation="-90"
-                                android:text="6"
-                                android:textAlignment="center"
-                                android:textSize="40sp" />
-                        </androidx.cardview.widget.CardView>
-                        <!--SEAT NO. 6 CONTAINER-->
                     </LinearLayout>
                     <!--LEFT SIDE SEAT CONTAINER-->
 
@@ -200,12 +160,12 @@
                             app:cardCornerRadius="10dp">
 
                             <TextView
-                                android:id="@+id/seat_7_label"
+                                android:id="@+id/seat_5_label"
                                 android:layout_width="85dp"
                                 android:layout_height="85dp"
                                 android:background="@color/seat_color_0"
                                 android:rotation="90"
-                                android:text="7"
+                                android:text="5"
                                 android:textAlignment="center"
                                 android:textSize="40sp" />
                         </androidx.cardview.widget.CardView>
@@ -220,56 +180,18 @@
                             app:cardCornerRadius="10dp">
 
                             <TextView
-                                android:id="@+id/seat_8_label"
+                                android:id="@+id/seat_6_label"
                                 android:layout_width="85dp"
                                 android:layout_height="85dp"
                                 android:background="@color/seat_color_0"
                                 android:rotation="90"
-                                android:text="8"
+                                android:text="6"
                                 android:textAlignment="center"
                                 android:textSize="40sp" />
                         </androidx.cardview.widget.CardView>
                         <!--SEAT NO. 8 CONTAINER-->
 
-                        <!--SEAT NO. 9 CONTAINER-->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="10dp">
 
-                            <TextView
-                                android:id="@+id/seat_9_label"
-                                android:layout_width="85dp"
-                                android:layout_height="85dp"
-                                android:background="@color/seat_color_0"
-                                android:rotation="90"
-                                android:text="9"
-                                android:textAlignment="center"
-                                android:textSize="40sp" />
-                        </androidx.cardview.widget.CardView>
-                        <!--SEAT NO. 9 CONTAINER-->
-
-                        <!--SEAT NO. 10 CONTAINER-->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="10dp">
-
-                            <TextView
-                                android:id="@+id/seat_10_label"
-                                android:layout_width="85dp"
-                                android:layout_height="85dp"
-                                android:background="@color/seat_color_0"
-                                android:rotation="90"
-                                android:text="10"
-                                android:textAlignment="center"
-                                android:textSize="40sp" />
-                        </androidx.cardview.widget.CardView>
-                        <!--SEAT NO. 10 CONTAINER-->
                     </LinearLayout>
                     <!--RIGHT SIDE SEAT CONTAINER-->
                 </LinearLayout>

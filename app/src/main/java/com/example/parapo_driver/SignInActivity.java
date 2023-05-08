@@ -1,8 +1,5 @@
 package com.example.parapo_driver;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,13 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parapo_driver.ui.signup.SignUpActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -92,27 +85,24 @@ public class SignInActivity extends AppCompatActivity {
         });
         //-----------------TO SIGN UP BUTTON ON CLICK FUNCTION SECTION------------
         //--------------SIGN IN BUTTON ON CLICK FUNCTION SECTION------------------
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String signInEmail = signinEmailText.getText().toString();
-                String signInPassword = signinPasswordText.getText().toString();
-                //CHECKING IF TEXT BOXES HAVE ERROR VALUES
-                if (TextUtils.isEmpty(signInEmail) || !Patterns.EMAIL_ADDRESS.matcher(signInEmail).matches()) {
-                    Toast.makeText(SignInActivity.this, "Please provide your email", Toast.LENGTH_SHORT).show();
-                    signinEmailText.setError("Enter a valid email address");
-                    signinEmailText.requestFocus();
-                }
-                else if (TextUtils.isEmpty(signInPassword)) {
-                    Toast.makeText(SignInActivity.this, "Please provide your correct password", Toast.LENGTH_SHORT).show();
-                    signinPasswordText.setError("Enter a correct password");
-                    signinPasswordText.requestFocus();
-                }
-                else {
-                    signinProgressBar.setVisibility(View.VISIBLE);
-                    //1--SIGNING IN USER FUNCTION
-                    signInUser(signInEmail, signInPassword);
-                }
+        signinButton.setOnClickListener(v -> {
+            String signInEmail = signinEmailText.getText().toString();
+            String signInPassword = signinPasswordText.getText().toString();
+            //CHECKING IF TEXT BOXES HAVE ERROR VALUES
+            if (TextUtils.isEmpty(signInEmail) || !Patterns.EMAIL_ADDRESS.matcher(signInEmail).matches()) {
+                Toast.makeText(SignInActivity.this, "Please provide your email", Toast.LENGTH_SHORT).show();
+                signinEmailText.setError("Enter a valid email address");
+                signinEmailText.requestFocus();
+            }
+            else if (TextUtils.isEmpty(signInPassword)) {
+                Toast.makeText(SignInActivity.this, "Please provide your correct password", Toast.LENGTH_SHORT).show();
+                signinPasswordText.setError("Enter a correct password");
+                signinPasswordText.requestFocus();
+            }
+            else {
+                signinProgressBar.setVisibility(View.VISIBLE);
+                //1--SIGNING IN USER FUNCTION
+                signInUser(signInEmail, signInPassword);
             }
         });
         //--------------SIGN IN BUTTON ON CLICK FUNCTION SECTION------------------
@@ -120,36 +110,33 @@ public class SignInActivity extends AppCompatActivity {
 
     //---------------SIGNING IN USER FUNCTION SECTION------------------------
     private void signInUser(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                }
-                else {
-                    try {
-                        throw Objects.requireNonNull(task.getException());
-                    }
-                    catch (FirebaseAuthInvalidUserException e) {
-                        String title = "Unknown Traveler";
-                        String message = "Can't find Traveler account! Make sure that you have a valid account to use ParaPo.";
-                        popUpAlert = new PopUpAlert(title, message, SignInActivity.this);
-                        signinEmailText.setError("Traveler doesn't exist!");
-                        signinEmailText.requestFocus();
-                    }
-                    catch (FirebaseAuthInvalidCredentialsException e){
-                        signinEmailText.setError("Invalid log in credential");
-                        signinPasswordText.setError("Invalid log in credential");
-                        signinEmailText.requestFocus();
-                        signinPasswordText.requestFocus();
-                    }
-                    catch(Exception e){
-                        Log.e(TAG, e.getMessage());
-                        Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                signinProgressBar.setVisibility(View.GONE);
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                startActivity(new Intent(SignInActivity.this, MainActivity.class));
             }
+            else {
+                try {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                catch (FirebaseAuthInvalidUserException e) {
+                    String title = "Unknown Traveler";
+                    String message = "Can't find Traveler account! Make sure that you have a valid account to use ParaPo.";
+                    popUpAlert = new PopUpAlert(title, message, SignInActivity.this);
+                    signinEmailText.setError("Traveler doesn't exist!");
+                    signinEmailText.requestFocus();
+                }
+                catch (FirebaseAuthInvalidCredentialsException e){
+                    signinEmailText.setError("Invalid log in credential");
+                    signinPasswordText.setError("Invalid log in credential");
+                    signinEmailText.requestFocus();
+                    signinPasswordText.requestFocus();
+                }
+                catch(Exception e){
+                    Log.e(TAG, e.getMessage());
+                    Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            signinProgressBar.setVisibility(View.GONE);
         });
     }
     //---------------SIGNING IN USER FUNCTION SECTION------------------------

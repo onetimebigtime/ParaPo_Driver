@@ -1,8 +1,5 @@
 package com.example.parapo_driver.ui.signup;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,26 +11,19 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.parapo_driver.MainActivity;
 import com.example.parapo_driver.R;
 import com.example.parapo_driver.SignInActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
-    //INITIALIZING COMPONENTS
-    private TextView cancelTextView;
     private EditText signupFullNameText, signupEmailAddressText, signupPlateNumberText,signupPasswordText, signupConfirmText;
-    private int seat_1, seat_2, seat_3, seat_4, seat_5, seat_6, seat_7, seat_8, seat_9, seat_10;
+    private int seat_1, seat_2, seat_3, seat_4, seat_5, seat_6;
     private double latitude, longitude;
     private String full_name, email_address, plate_number, password, confirm_password, route;
     private Boolean isOnline;
@@ -57,7 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
         signupPasswordText = findViewById(R.id.signup_password_text);
         signupConfirmText = findViewById(R.id.confirmpass_text);
 
-        cancelTextView = findViewById(R.id.signup_cancel_link);
+        //INITIALIZING COMPONENTS
+        TextView cancelTextView = findViewById(R.id.signup_cancel_link);
 
         //SET UP PROGRESS BAR
         signupProgressBar = findViewById(R.id.signup_progressbar);
@@ -118,12 +109,9 @@ public class SignUpActivity extends AppCompatActivity {
         //-----------------------------SIGN UP BUTTON ON CLICK FUNCTION SECTION------------------------------------------
 
         //-----------------------------CANCEL BUTTON ON CLICK FUNCTION SECTION------------------------------------------
-        cancelTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                finish();
-            }
+        cancelTextView.setOnClickListener(v -> {
+            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+            finish();
         });
         //-----------------------------CANCEL BUTTON ON CLICK FUNCTION SECTION------------------------------------------
     }
@@ -131,69 +119,64 @@ public class SignUpActivity extends AppCompatActivity {
     private void signInUser(String full_name, String email_address, String plate_number, String password) {
 
         //SETTING UP SEAT,LAT, LONG VARIABLES VALUE TO 0 AND DEFAULT PLACE
-        seat_1 = seat_2 = seat_3 = seat_4 = seat_5 = seat_6 = seat_7 = seat_8 = seat_9 = seat_10 = 0;
+        seat_1 = seat_2 = seat_3 = seat_4 = seat_5 = seat_6 = 0;
         latitude = longitude = 0d;
         isOnline = false;
         route = "Unknown";
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         //FUNCTION TO CREATE A USER USING EMAIL AND PASSWORD
-        firebaseAuth.createUserWithEmailAndPassword(email_address, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                //IF THE CREATION IS SUCCESSFUL AND COMPLETE
-                if (task.isSuccessful()){
-                    Toast.makeText(SignUpActivity.this, "Congrats! You are now a ParaPo Driver", Toast.LENGTH_SHORT).show();
-                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();//GET THE CURRENT USER
-                    String userId = firebaseUser.getUid();
+        firebaseAuth.createUserWithEmailAndPassword(email_address, password).addOnCompleteListener(SignUpActivity.this, task -> {
+            //IF THE CREATION IS SUCCESSFUL AND COMPLETE
+            if (task.isSuccessful()){
+                Toast.makeText(SignUpActivity.this, "Congrats! You are now a ParaPo Driver", Toast.LENGTH_SHORT).show();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();//GET THE CURRENT USER
+                assert firebaseUser != null;
+                String userId = firebaseUser.getUid();
 
-                    //SET USER DATA
-                    UserData setUserData = new UserData(userId ,full_name, plate_number, route, seat_1, seat_2, seat_3, seat_4,
-                            seat_5, seat_6, seat_7, seat_8, seat_9, seat_10, latitude, longitude, isOnline);
+                //SET USER DATA
+                UserData setUserData = new UserData(userId ,full_name, plate_number, route, seat_1, seat_2, seat_3, seat_4,
+                        seat_5, seat_6, latitude, longitude, isOnline);
 
-                    //GETTING DRIVERS REFERENCE IN FIREBASE
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Drivers");
-                    databaseReference.child(userId).setValue(setUserData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                //firebaseUser.sendEmailVerification(); //SEND EMAIL VERIFICATION
-                                //CREATING AN INTENT TO OPEN MAIN ACTIVITY
-                                Intent intent =new Intent(SignUpActivity.this, MainActivity.class );
+                //GETTING DRIVERS REFERENCE IN FIREBASE
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Drivers");
+                databaseReference.child(userId).setValue(setUserData).addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()){
+                        //firebaseUser.sendEmailVerification(); //SEND EMAIL VERIFICATION
+                        //CREATING AN INTENT TO OPEN MAIN ACTIVITY
+                        Intent intent =new Intent(SignUpActivity.this, MainActivity.class );
 
-                                //Prevent user from returning back to register
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish(); //END SIGNUP ACTIVITY
-                            }
-                            else {
-                                try {
-                                    throw Objects.requireNonNull(task.getException());
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage());
-                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                                //Set progressbar visibility TO DISAPPEAR
-                                signupProgressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    });
-
-                }
-                else {
-                    try {
-                        throw Objects.requireNonNull(task.getException());
-                    } catch (FirebaseAuthUserCollisionException e) {
-                        signupEmailAddressText.setError("A Traveler exist with this email!");
-                        signupEmailAddressText.requestFocus();
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
-                        Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Prevent user from returning back to register
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish(); //END SIGNUP ACTIVITY
                     }
-                    ///Set progressbar visibility TO DISAPPEAR
-                    signupProgressBar.setVisibility(View.GONE);
+                    else {
+                        try {
+                            throw Objects.requireNonNull(task1.getException());
+                        } catch (Exception e) {
+                            Log.e(TAG, e.getMessage());
+                            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        //Set progressbar visibility TO DISAPPEAR
+                        signupProgressBar.setVisibility(View.GONE);
+                    }
+                });
+
+            }
+            else {
+                try {
+                    throw Objects.requireNonNull(task.getException());
+                } catch (FirebaseAuthUserCollisionException e) {
+                    signupEmailAddressText.setError("A Traveler exist with this email!");
+                    signupEmailAddressText.requestFocus();
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                ///Set progressbar visibility TO DISAPPEAR
+                signupProgressBar.setVisibility(View.GONE);
             }
         });
     }

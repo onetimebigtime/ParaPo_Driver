@@ -35,7 +35,7 @@ public class SeatsFragment extends Fragment {
     private FragmentSeatsBinding binding;
     public static final String TAG = "SeatFragment";
 
-    private TextView seat1, seat2, seat3, seat4, seat5, seat6, seat7, seat8, seat9, seat10;
+    private TextView seat1, seat2, seat3, seat4, seat5, seat6;
 
     private EditText routeText;
     private FirebaseUser firebaseUser;
@@ -57,10 +57,6 @@ public class SeatsFragment extends Fragment {
         seat4 = binding.seat4Label;
         seat5 = binding.seat5Label;
         seat6 = binding.seat6Label;
-        seat7 = binding.seat7Label;
-        seat8 = binding.seat8Label;
-        seat9 = binding.seat9Label;
-        seat10 = binding.seat10Label;
         checkFirebaseUser();
 
         goButton.setOnClickListener(v -> {
@@ -105,10 +101,6 @@ public class SeatsFragment extends Fragment {
                     seatFour(setUserData.seat_4, color_0, color_1);
                     seatFive(setUserData.seat_5, color_0, color_1);
                     seatSix(setUserData.seat_6, color_0, color_1);
-                    seatSeven(setUserData.seat_7, color_0, color_1);
-                    seatEight(setUserData.seat_8, color_0, color_1);
-                    seatNine(setUserData.seat_9, color_0, color_1);
-                    seatTen(setUserData.seat_10, color_0, color_1);
                 }
             }
 
@@ -176,42 +168,6 @@ public class SeatsFragment extends Fragment {
         }
     }
 
-    private void seatSeven(int seat_7, int color_0, int color_1) {
-        if (seat_7 == 1){
-            seat7.setBackgroundColor(color_1);
-        }
-        else {
-            seat7.setBackgroundColor(color_0);
-        }
-    }
-
-    private void seatEight(int seat_8, int color_0, int color_1) {
-        if (seat_8 == 1){
-            seat8.setBackgroundColor(color_1);
-        }
-        else {
-            seat8.setBackgroundColor(color_0);
-        }
-    }
-
-    private void seatNine(int seat_9, int color_0, int color_1) {
-        if (seat_9 == 1){
-            seat9.setBackgroundColor(color_1);
-        }
-        else {
-            seat9.setBackgroundColor(color_0);
-        }
-    }
-
-    private void seatTen(int seat_10, int color_0, int color_1) {
-        if (seat_10 == 1){
-            seat10.setBackgroundColor(color_1);
-        }
-        else {
-            seat10.setBackgroundColor(color_0);
-        }
-    }
-
     public void updateRoute(String route){
         try {
             if (TextUtils.isEmpty(route)){
@@ -226,11 +182,12 @@ public class SeatsFragment extends Fragment {
                 }
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Drivers").child(user.getUid());
                 ref.child("route").setValue(route);
+                Toast.makeText(requireActivity(), "Route Successfully added!", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e) {
             Log.e(TAG, "Failed to update online status", e);
-            Toast.makeText(requireActivity(), "Failed to update online status!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Failed to update route status!", Toast.LENGTH_SHORT).show();
         }
 
     }
